@@ -8,6 +8,7 @@ function CreateArea(props) {
     title: "",
     content: "",
   });
+  const [isEmpty, setIsEmpty] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -23,6 +24,23 @@ function CreateArea(props) {
 
   function handleZoom() {
     setBool(true);
+  }
+
+  function handleClick() {
+    const checkEmpty = !Object.values(noteContent).some(
+      (x) => x !== null && x !== ""
+    );
+    if (checkEmpty) {
+      console.log("error");
+      setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
+      props.onAdd(noteContent);
+      setNoteContent({
+        title: "",
+        content: "",
+      });
+    }
   }
 
   return (
@@ -44,19 +62,11 @@ function CreateArea(props) {
           value={noteContent.content}
         />
         <Zoom in={bool}>
-          <Fab
-            type="button"
-            onClick={() => {
-              props.onAdd(noteContent);
-              setNoteContent({
-                title: "",
-                content: "",
-              });
-            }}
-          >
+          <Fab type="button" onClick={handleClick}>
             <AddIcon />
           </Fab>
         </Zoom>
+        {isEmpty && <p className="error">Write something</p>}
       </form>
     </div>
   );
