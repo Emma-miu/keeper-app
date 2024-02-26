@@ -44,7 +44,7 @@ function CreateArea(props) {
   }
 
   return (
-    <div>
+    <div class="create-note-box">
       <form className="create-note">
         <input
           onChange={handleChange}
