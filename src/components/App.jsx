@@ -1,3 +1,4 @@
+import '../style.css'; 
 import React, { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -24,17 +25,19 @@ function App() {
   return (
     <div>
       <Header />
-      <div class="main">
+      <div className="main">
       <CreateArea onAdd={addNote} />
+      <div className="note-box">
       {newNote.map((note, index) => (
-        <Note
-          key={index}
-          id={index}
-          title={note.title}
-          content={note.content}
-          onDelete={deleteNote}
-        />
+          <Note
+            key={index}
+            id={index}
+            title={note.title}
+            content={note.content}
+            onDelete={deleteNote}
+          />
       ))}
+      </div>
       </div>
       <Footer />
     </div>
